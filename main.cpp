@@ -1,5 +1,4 @@
 #include <opencv2/opencv.hpp>
-#include <chrono>
 #include <iostream>
 #include <thread>
 #include <time.h>
@@ -69,10 +68,9 @@ int main() {
     filter(grau, mask3x3, temp1);
     filter(temp1, mask3x3, temp2);
     filter(temp2, mask3x3, result1);
-    const std::clock_t a_end = std::clock();
+    const clock_t a_end = clock();
 
     // 2. Einmalige 7x7-Binomialfilterung
-    chrono::high_resolution_clock::now();
     float array7x7[] = {1,  6,  15, 20, 15,  6,  1,
                         6, 36,  90, 120, 90, 36,  6,
                        15, 90, 225, 300, 225, 90, 15,
@@ -85,7 +83,7 @@ int main() {
 
     const clock_t b_start = clock();
     filter(grau, mask7x7, result2);
-    const std::clock_t b_end = std::clock();
+    const clock_t b_end = clock();
 
     // 3. Separable Filter: 7x1 und dann 1x7
     float array7[] = {1, 6, 15, 20, 15, 6, 1};
@@ -97,7 +95,7 @@ int main() {
     const clock_t c_start = clock();
     filter(grau, mask7x1, temp3);
     filter(temp3, mask1x7, result3);
-    const std::clock_t c_end = std::clock();
+    const clock_t c_end = clock();
 
 
     // Werte für einen Bildpunkt ausgeben (z.B. Pixel bei 100, 100)
